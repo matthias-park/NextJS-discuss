@@ -2,12 +2,17 @@
 
 import { z } from "zod";
 import { auth } from "@/auth";
+import type { Topic } from "@prisma/client";
+import { redirect } from "next/navigation";
+import { db } from "@/db";
+import paths from "@/path";
+import { revalidatePath } from "next/cache";
 
 const createTopicSchema = z.object({
   name: z
     .string()
     .min(3)
-    .regex(/[^a-z-]+$/, {
+    .regex(/[a-z-]+$/, {
       message: "Must be lowercase letters or dashes without spaces",
     }),
   description: z.string().min(10),
@@ -37,7 +42,6 @@ export async function createTopic(
 
   const session = await auth();
   if (!session || !session.user) {
-    console.log('session')
     return {
       errors: {
         _form: ["You must be signed in to do this."],
@@ -45,8 +49,34 @@ export async function createTopic(
     };
   }
 
+  let topic: Topic;
+  try {
+    topic = await db.topic.create({
+      data: {
+        slug: result.data.name,
+        description: result.data.description
+      }
+    })
+  } catch(err: unknown) {
+    if(err instanceof Error) {
+      return {
+        errors:{
+          _form: [err.message]
+        }
+      }
+    } else {
+      return {
+        errors: {
+          _form: ['Something went wront']
+        }
+      }
+    }
+  }
+
+  revalidatePath('/')
+  redirect(paths.topicShow(topic.slug));
+
   return {
     errors: {},
   };
-  //TODO: revlidate the homepage after creating a topic
 }

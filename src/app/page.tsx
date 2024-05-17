@@ -1,4 +1,4 @@
-import TopicCreateForm from "@/components/topics/topic-create-from";
+import TopicCreateForm from "@/app/topics/topic-create-from";
 
 export default async function Home() {
   return <div className="grid grid-cols-4 gap-4 p-4">

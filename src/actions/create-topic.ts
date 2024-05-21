@@ -29,6 +29,7 @@ export async function createTopic(
   fromState: CreateTopicFormState,
   formData: FormData
 ): Promise<CreateTopicFormState> {
+
   const result = createTopicSchema.safeParse({
     name: formData.get("name"),
     description: formData.get("description"),

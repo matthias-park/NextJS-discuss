@@ -27,7 +27,7 @@ export async function createPost(
 ): Promise<CreatePostFormState> {
   const result = createPostSchema.safeParse({
     title: formData.get('title'),
-    conetnet: formData.get('content')
+    content: formData.get('content')
   });
 
   if(!result.success) {
@@ -35,6 +35,16 @@ export async function createPost(
       errors: result.error.flatten().fieldErrors
     }
   }
+
+  const session = await auth();
+  if(!session || !session.user) {
+    return {
+      errors: {
+        _form: ['You must be signed in to do this'],
+      }
+    }
+  }
+
 
   return {
     errors: {}

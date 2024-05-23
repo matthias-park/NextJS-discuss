@@ -5,7 +5,7 @@ import { auth } from "@/auth";
 import type { Topic } from "@prisma/client";
 import { redirect } from "next/navigation";
 import { db } from "@/db";
-import paths from "@/path";
+import paths from "@/paths";
 import { revalidatePath } from "next/cache";
 
 const createTopicSchema = z.object({

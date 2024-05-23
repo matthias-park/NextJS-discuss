@@ -1,6 +1,6 @@
 import type { Post, User, Topic } from '@prisma/client';
 import Link from 'next/link';
-import paths from '@/paths';
+import paths from "@/paths";
 
 // TODO: Get list of posts into this component somehow
 export default function PostList() {

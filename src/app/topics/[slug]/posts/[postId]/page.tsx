@@ -1,4 +1,5 @@
 import CommentCreateForm from "@/components/comments/comment-create-form";
+import { Suspense } from "react";
 import CommentList from "@/components/comments/comment-list";
 import PostShow from "@/components/posts/post-show";
 import paths from "@/paths";
@@ -9,19 +10,21 @@ interface PostShowPageProps {
   params: {
     slug: string;
     postId: string;
-  }
+  };
 }
 
-export default async function PostShowPage({params}: PostShowPageProps) {
-  const {slug, postId} = params
+export default async function PostShowPage({ params }: PostShowPageProps) {
+  const { slug, postId } = params;
   return (
     <div className="space-y-3">
       <Link className="underline decoration-slid" href={paths.topicShow(slug)}>
-        {'<'}Back to {slug}
+        {"<"}Back to {slug}
       </Link>
-      <PostShow postId={postId}/>
+      <Suspense fallback={<div>Loading...</div>}>
+        <PostShow postId={postId} />
+      </Suspense>
       <CommentCreateForm postId={postId} startOpen />
-      <CommentList postId={postId}/>
+      <CommentList postId={postId} />
     </div>
-  )
+  );
 }

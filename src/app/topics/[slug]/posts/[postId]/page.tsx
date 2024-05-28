@@ -5,6 +5,7 @@ import PostShow from "@/components/posts/post-show";
 import paths from "@/paths";
 import Link from "next/link";
 import { fetchCommentsByPostId } from "@/db/queries/comments";
+import PostShowLoading from "@/components/posts/post-show-loading";
 
 interface PostShowPageProps {
   params: {
@@ -20,7 +21,7 @@ export default async function PostShowPage({ params }: PostShowPageProps) {
       <Link className="underline decoration-slid" href={paths.topicShow(slug)}>
         {"<"}Back to {slug}
       </Link>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<PostShowLoading/>}>
         <PostShow postId={postId} />
       </Suspense>
       <CommentCreateForm postId={postId} startOpen />

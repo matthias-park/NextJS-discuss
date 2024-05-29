@@ -4,7 +4,6 @@ import {
   NavbarBrand,
   NavbarContent,
   NavbarItem,
-  Input,
 } from "@nextui-org/react";
 import HeaderAuth from "@/components/header-auth";
 import SearchInput from "./search-input";

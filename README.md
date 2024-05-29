@@ -1,4 +1,3 @@
-```markdown
 # NextJS Discuss
 
 Welcome to **NextJS Discuss**, a project designed to facilitate discussions around NextJS. This repository aims to provide a platform where developers can share ideas, ask questions, and engage in meaningful conversations about NextJS.
@@ -108,4 +107,3 @@ Happy discussing!
 **Repository Owner:** Matthias Park
 
 **GitHub:** [matthias-park](https://github.com/matthias-park)
-```
